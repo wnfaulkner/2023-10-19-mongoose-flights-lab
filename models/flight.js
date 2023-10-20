@@ -1,10 +1,11 @@
+const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 	
 const flightSchema = new Schema({
-  airline: {type: String, enum: ['American','Southwest','United']},
-  airport: {type: String, enum: ['MSY','MEX','EBB','YUL','LPB']},
+  airline: {type: String, enum: ['American','Southwest','United','JetBlue']},
+  airport: {type: String, enum: ['MSY','MEX','EBB','YUL','LPB','LOS','AMD','NEW','OGG']},
   flightNo: {type: Number, match: /\b(1[0-9]{1,3}|[2-9][0-9]{1,3}|9999)\b/},
-  departs: {
+  departureDate: {
     type: Date,
     validate: { //NOTE FOR REVIEWERS - THE FOLLOWING FUNCTION WAS COPY-PASTED FROM CHATGPT. THE LESSON ONLY COVERS STRING VALIDATION, NOT DATES.
       validator: function (value) {
@@ -17,3 +18,5 @@ const flightSchema = new Schema({
     },
   },
 });
+
+module.exports = mongoose.model('Flight', flightSchema)

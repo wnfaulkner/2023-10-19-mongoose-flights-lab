@@ -1,0 +1,39 @@
+<%- include('../partials/header') %>
+
+<form id="new-form" action="/flights" method="POST">
+  <label>Airline:</label>
+  <select name="airline" id="airline">
+    <% airlines.forEach(function(airline) { %>
+      <option value="<%= airline %>"><%= airline %></option>
+    <% }); %>
+  </select>
+  <label>Departure Airport:</label>
+  <select name="airport" id="airport">
+    <% airports.forEach(function(airport) { %>
+      <option value="<%= airport %>"><%= airport %></option>
+    <% }); %>
+  </select>
+  <label>Flight Number (10-9999):</label>
+  <input type="number" name="flightNo">
+  <label>Departure Date (future date up to one year from now):</label>
+  <input type="date" name="departureDate">
+
+
+  <!-- <label>Release Year:</label>
+  <input type="text" name="releaseYear">
+  <label>MPAA Rating</label>
+  <select name="mpaaRating">
+    <option value="G">G</option>
+    <option value="PG">PG</option>
+    <option value="PG-13">PG-13</option>
+    <option value="R">R</option>
+  </select>
+  <label>Cast (separate actors with commas):</label>
+  <input type="text" name="cast">
+  <label>Now Showing:</label>
+  <input type="checkbox" name="nowShowing" checked> -->
+  <br>
+  <input type="submit" value="Add Flight">
+</form>
+
+<%- include('../partials/footer') %>
