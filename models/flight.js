@@ -1,5 +1,10 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+
+const destinationSchema = new Schema({
+  destinationAirport: {type: String, enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN', 'KWD', 'BOS']},
+  arrivalDate: {type: Date}
+})
 	
 const flightSchema = new Schema({
   airline: {type: String, enum: ['American','Southwest','United','JetBlue']},
@@ -17,6 +22,7 @@ const flightSchema = new Schema({
       message: 'The depart date must be within one year from the current date.',
     },
   },
+  destinations: [destinationSchema]
 });
 
 module.exports = mongoose.model('Flight', flightSchema)

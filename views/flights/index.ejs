@@ -15,7 +15,12 @@
         <td><%= f.airline %></td>
         <td><%= f.flightNo %></td>
         <td><%= f.airport %></td>
-        <td><%= f.departs %></td>
+        <td><%= f.departureDate %></td>
+        <td>
+          <a href="/flights/<%=f.id%>">
+            <button type = "submit" >View Details</button>
+          </a>
+        </td>
       </tr>
       <% }); %>
     </tbody>

@@ -2,7 +2,9 @@ const Flight = require('../models/flight')
 
 module.exports = {
   index, 
-  new: newFlight
+  new: newFlight,
+  create: createFlight,
+  show: showFlight
 }
 
 //functions
@@ -30,4 +32,38 @@ async function newFlight(req, res) {
       airports: airportOptions.sort(),
     }
   )
+}
+
+//CREATE
+async function createFlight(req, res) {
+  req.body.departureDate = new Date(req.body.departureDate)
+  
+  try {
+    await Flight.create(req.body)
+    res.redirect('/flights')
+  } catch {
+    //console.log(err)
+    //res.render('flights/new', {errorMsg: err.message})
+  }
+}
+
+//SHOW
+async function showFlight(req, res) {
+  const flight = await Flight.findById(req.params.id).populate('destinations')
+  const destinationAirports = Flight.schema.path('destinations.destinationAirport').enumValues
+  flight.departureDate = new Date(flight.departureDate)
+  // console.log(flight.destinations)
+  
+  try {
+    res.render('flights/show', 
+      {
+        title: 'Flight Details',
+        flight: flight,
+        destinationAirports: destinationAirports
+      }
+    )
+  } catch {
+    //console.log(err)
+    //res.render('flights/new', {errorMsg: err.message})
+  }
 }
