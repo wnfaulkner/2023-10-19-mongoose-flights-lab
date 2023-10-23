@@ -7,7 +7,10 @@ module.exports = {
 async function create(req, res) {
   const flight = await Flight.findById(req.params.id).populate('destinations')
   
-  flight.destinations.push({destinationAirport: req.body.destination, arrivalDate: req.body.arrivalDate})
+  flight.destinations.push({
+    destinationAirport: req.body.destination, 
+    arrivalDate: req.body.arrivalDate
+  })
   
   try {
     await flight.save()

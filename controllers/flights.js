@@ -49,9 +49,12 @@ async function createFlight(req, res) {
 
 //SHOW
 async function showFlight(req, res) {
-  const flight = await Flight.findById(req.params.id).populate('destinations')
+  const flight = await Flight.findById(req.params.id).populate('destinations').populate('tickets')
+  
   const destinationAirports = Flight.schema.path('destinations.destinationAirport').enumValues
   flight.departureDate = new Date(flight.departureDate)
+  
+  // const tickets = 
   // console.log(flight.destinations)
   
   try {

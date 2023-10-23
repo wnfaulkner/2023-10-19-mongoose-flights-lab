@@ -10,20 +10,9 @@
   <div>Departure Date: </div>
   <div><%= flight.departureDate %></div>
 </section>
+
+<!-- DESTINATIONS -->
 <br><br><h2>Destinations</h2>
-<form id="add-destination-form" method="POST"
-  action="/flights/<%= flight._id %>/destinations">
-  <label>Destination Airport:</label>
-  <select name="destination" id="destination">
-    <% destinationAirports.forEach(function(destinationAirport) { %>
-      <option value="<%= destinationAirport %>"><%= destinationAirport %></option>
-    <% }); %>
-  </select>
-  <br>
-  <input type="datetime-local" name="arrivalDate">
-  <br>
-  <input type="submit" value="Add Destination">
-</form>
 <% if (flight.destinations) { %>
   <table>
     <thead>
@@ -45,5 +34,57 @@
 <% } else { %>
   <h5>No Destinations Added Yet</h5>
 <% } %>
+
+<!-- TICKETS -->
+<br><br><h2>Tickets</h2>
+<% console.log(flight.tickets) %>
+<% if (flight.tickets) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Seat</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flight.tickets.forEach(function(ticket) { %>
+        <tr>
+          <td><%= ticket.seat %></td>
+          <td><%= ticket.price %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+<% } else { %>
+  <h5>No Tickets Added Yet</h5>
+<% } %>
+
+<!-- INPUT FORM: DESTINATION -->
+<br><h3>Add Destination</h3>
+<form id="add-destination-form" method="POST"
+action="/flights/<%= flight._id %>/destinations">
+<label>Destination Airport:</label>
+<select name="destination" id="destination">
+  <% destinationAirports.forEach(function(destinationAirport) { %>
+    <option value="<%= destinationAirport %>"><%= destinationAirport %></option>
+    <% }); %>
+  </select>
+  <br>
+  <input type="datetime-local" name="arrivalDate">
+  <br>
+  <input type="submit" value="Add Destination">
+</form>
+
+<!-- INPUT FORM: TICKET -->
+<br><br><h3>Add New Ticket</h3>
+<form id="add-ticket-form" method="POST"
+  action="/flights/<%= flight._id %>/tickets">
+  <label>Seat:</label>
+  <input type="string" name="seat">
+  <br>
+  <input type="number" name="price">
+  <br>
+  <input type="submit" value="Add Ticket">
+</form>
 
 <%- include('../partials/footer') %>

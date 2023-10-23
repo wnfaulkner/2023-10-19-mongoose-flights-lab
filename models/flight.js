@@ -22,7 +22,11 @@ const flightSchema = new Schema({
       message: 'The depart date must be within one year from the current date.',
     },
   },
-  destinations: [destinationSchema]
+  destinations: [destinationSchema],
+  tickets: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Ticket'
+  }]
 });
 
 module.exports = mongoose.model('Flight', flightSchema)
