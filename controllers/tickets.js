@@ -7,22 +7,24 @@ module.exports = {
 
 async function create(req, res) {
   
-  const flight = await Flight.findById(req.params.id).populate('tickets')
-
-  console.log('##################################################',flight)
-  console.log('##################################################',flight.tickets)
-  
-  Ticket.push({
+  const flight = await Flight.findById(req.params.id)
+ 
+  const newTicket = await Ticket.create({
     seat: req.body.seat, 
     price: req.body.price, 
     flight: req.params.id,
   })
-  
+
+  flight.tickets.push(newTicket)
+
+  // console.log(flight)
+
   try {
     await flight.save()
+    //res.send(flight)
+    res.redirect(`/flights/${flight._id}`)
   } catch (err) {
     console.log(err)
   }
   
-  res.redirect(`/flights/${flight._id}`)
 }

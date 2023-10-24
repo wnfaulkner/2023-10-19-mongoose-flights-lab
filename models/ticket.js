@@ -7,4 +7,4 @@ const ticketSchema = new Schema({
   flight: {type: Schema.Types.ObjectId, ref: 'Flight'}
 })
 
-module.experts = mongoose.model('Ticket', ticketSchema)
+module.exports = mongoose.model('Ticket', ticketSchema)

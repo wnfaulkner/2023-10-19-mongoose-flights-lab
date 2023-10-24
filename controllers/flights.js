@@ -58,6 +58,7 @@ async function showFlight(req, res) {
   // console.log(flight.destinations)
   
   try {
+    //res.send(flight)
     res.render('flights/show', 
       {
         title: 'Flight Details',
