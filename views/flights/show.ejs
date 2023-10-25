@@ -59,32 +59,35 @@
   <h5>No Tickets Added Yet</h5>
 <% } %>
 
-<!-- INPUT FORM: DESTINATION -->
-<br><h3>Add Destination</h3>
-<form id="add-destination-form" method="POST"
-action="/flights/<%= flight._id %>/destinations">
-<label>Destination Airport:</label>
-<select name="destination" id="destination">
-  <% destinationAirports.forEach(function(destinationAirport) { %>
-    <option value="<%= destinationAirport %>"><%= destinationAirport %></option>
-    <% }); %>
-  </select>
-  <br>
-  <input type="datetime-local" name="arrivalDate">
-  <br>
-  <input type="submit" value="Add Destination">
-</form>
+<section id = 'data-input-forms'>
+  <!-- INPUT FORM: DESTINATION -->
+  <br><h3>Add Destination</h3>
+  <form id="add-destination-form" method="POST"
+  action="/flights/<%= flight._id %>/destinations">
+  <label>Destination Airport:</label>
+  <select name="destination" id="destination">
+    <% destinationAirports.forEach(function(destinationAirport) { %>
+      <option value="<%= destinationAirport %>"><%= destinationAirport %></option>
+      <% }); %>
+    </select>
+    <br>
+    <label>Arrival Date & Time:</label>
+    <input type="datetime-local" name="arrivalDate">
+    <br>
+    <input type="submit" value="Add Destination">
+  </form>
 
-<!-- INPUT FORM: TICKET -->
-<br><br><h3>Add New Ticket</h3>
-<form id="add-ticket-form" method="POST"
-  action="/flights/<%= flight._id %>/tickets">
-  <label>Seat:</label>
-  <input type="string" name="seat">
-  <br>
-  <input type="number" name="price">
-  <br>
-  <input type="submit" value="Add Ticket">
-</form>
-
+  <!-- INPUT FORM: TICKET -->
+  <br><br><h3>Add New Ticket</h3>
+  <form id="add-ticket-form" method="POST"
+    action="/flights/<%= flight._id %>/tickets">
+    <label>Seat:</label>
+    <input type="string" name="seat">
+    <br>
+    <label>Price:</label>
+    <input type="number" name="price">
+    <br>
+    <input type="submit" value="Add Ticket">
+  </form>
+</section>
 <%- include('../partials/footer') %>
